@@ -2,7 +2,7 @@
   Algorithm for counting inversions in an array
 
   @author Evgeniy Kuznetsov
-  @date 30.1.2015 0:42
+  @date 31.1.2015 2:36
  */
 
 // @param {Array.<Integer>} a
@@ -19,7 +19,7 @@ function inversionsCount(a){
   // @param {Object} fo
   // @param {Object} so
   // @return {Object} keys: sorted - sorted array, inversions - number of inversions
-  var countSplit = function(fo,so){
+  var mergeAndCount = function(fo,so){
     var f = fo.sorted,
         s = so.sorted;
 
@@ -62,7 +62,7 @@ function inversionsCount(a){
   // Main recursion loop
   // @param {Array.<Integer>} a
   // @return {Object} keys: sorted - sorted array, inversions - number of inversions
-  var count = function(a){
+  var sortAndCount = function(a){
     if(a.length<2){
       return {
         sorted: a,
@@ -72,15 +72,14 @@ function inversionsCount(a){
     }else{
 
       var splitPoint = getSplitPoint(a.length);
-      var left = count(a.slice(0, splitPoint));
-      var right = count(a.slice(splitPoint, a.length));
-      var split = countSplit(left, right);
+      var left = sortAndCount(a.slice(0, splitPoint));
+      var right = sortAndCount(a.slice(splitPoint, a.length));
 
-      return split;
+      return mergeAndCount(left, right);
     }
   };
 
-  return count(a).inversions;
+  return sortAndCount(a).inversions;
 }
 
 var test = [];
