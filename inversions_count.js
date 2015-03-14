@@ -1,7 +1,7 @@
 /*
   Algorithm for counting inversions in a given array
 
-  The inversion is two in indices in an array A such that i<j & A[i]>A[j]
+  The inversion is two indices in an array A such that i<j & A[i]>A[j]
 
 
   @author Evgeniy Kuznetsov
